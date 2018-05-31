@@ -31,5 +31,8 @@ namespace PRANSAC
     	int bestModelIdx; 
 
     	std::vector<std::mt19937>m_RandEnginers;  // Mersenne twister high quality RNG that support *OpenMP* multi-threading
+
+    public:
+        RANSAC(void)
     }; 
 }
