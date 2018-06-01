@@ -34,5 +34,7 @@ namespace PRANSAC
 
     public:
         RANSAC(void)
-    }; 
+	{
+             int threads = std::max(1, omp_get_max_threads());
+     	}; 
 }
