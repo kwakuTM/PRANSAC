@@ -18,19 +18,12 @@ namespace PRANSAC
     };
 
     template <int planeParams> /* Minimum number of parameters required to define the plane model*/
-    class AbstractPlane
+    class Plane
     {
-    protected:
-	std::array<std::shared_ptr<DimSpace>, planeParams> numPlaneParams; 
-
-        virtual NPfloat ComputePointDistance(std::shared_ptr<DimSpace> pt) = 0;
+    protected: 
 
     public:
-        virtual void Initialize(const std::vector<std::shared_ptr<DimSpace>> &InputParams) = 0;
-        virtual std::pair<NPfloat, std::vector<std::shared_ptr<DimSpace>>> Evaluate(const std::vector<std::shared_ptr<DimSpace>> &EvaluateParams, NPfloat Threshold) = 0;
-
-        virtual std::array<std::shared_ptr<DimSpace>, planeParams> GetModelParams(void) { return numPlaneParams; };
-        virtual ~AbstractPlane(void){};
+        
     };
 } // namespace PRANSAC
 
