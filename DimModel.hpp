@@ -8,7 +8,7 @@
 
 namespace PRANSAC
 {
-    typedef float NPfloat;
+    typedef double NPdouble;
 
     // A class point where the point model is constructed from
     class DimSpace

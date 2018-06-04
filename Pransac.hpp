@@ -48,7 +48,7 @@ namespace PRANSAC
 
         virtual ~RANSAC(void){}; 
 
-        void Initialize(NPfloat threshold, int maxIterations = 1000)
+        void Initialize(NPdouble threshold, int maxIterations = 1000)
         {
             threshold = threshold;
             maxIterations = maxIterations;
@@ -78,9 +78,10 @@ namespace PRANSAC
 
             allData = Data;
 
-            int DataSize = allData.size();
-            std::vector<NPfloat> InlierFractionAccum(m_MaxIterations);
+            std::vector<NPdouble> InlierFractionAccum(m_MaxIterations);
             std::vector<std::vector<std::shared_ptr<DimSpace>>> InliersAccum(m_MaxIterations);
+            std::vector<std::shared_ptr<DimSpace>> allInlierPoints;
+            allSampledModels.resize(m_MaxIterations);
         };
     };
 }
