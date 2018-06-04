@@ -68,6 +68,19 @@ namespace PRANSAC
         const std::vector<std::vector<std::shared_ptr<DimSpace>>>& GetBestInliers(void) { return bestInliers; };
         std::shared_ptr<T> GetBestModel(void){ return bestModel; };
         
-        bool Estimate(const std::vector<std::shared_ptr<DimSpace>>& Data){};
+        bool Estimate(const std::vector<std::shared_ptr<DimSpace>>& Data)
+        {
+            if (Data.size() <= planeParams)
+            {
+                std::cerr << "[ WARN ]: RANSAC - Input data is too small, RANSAC idle"
+                return false;
+            }
+
+            allData = Data;
+
+            int DataSize = allData.size();
+            std::vector<NPfloat> InlierFractionAccum(m_MaxIterations);
+            std::vector<std::vector<std::shared_ptr<DimSpace>>> InliersAccum(m_MaxIterations);
+        };
     };
 }
