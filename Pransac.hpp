@@ -82,6 +82,10 @@ namespace PRANSAC
             std::vector<std::vector<std::shared_ptr<DimSpace>>> InliersAccum(m_MaxIterations);
             std::vector<std::shared_ptr<DimSpace>> allInlierPoints;
             allSampledModels.resize(m_MaxIterations);
+
+            int numTreads =std::max(1, omp_get_max_threads());
+            omp_set_dynamic(0);
+            omp_set_num_threads(numTreads);
         };
     };
 }
