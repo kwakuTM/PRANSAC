@@ -86,6 +86,8 @@ namespace PRANSAC
             int numTreads =std::max(1, omp_get_max_threads());
             omp_set_dynamic(0);
             omp_set_num_threads(numTreads);
+
+            //#pragma omp parallel for
         };
     };
 }
