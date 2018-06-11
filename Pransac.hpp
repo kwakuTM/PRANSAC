@@ -88,6 +88,15 @@ namespace PRANSAC
             omp_set_num_threads(numTreads);
 
             //#pragma omp parallel for
+            for (int = 0; i < m_MaxIterations; i++)
+            {
+                if (bestInliers.siz() < num_planes_expected && allData.size() > 3)
+                {
+                    //Select planeParams random samples
+                    std::vector<std::shared_ptr<DimSpace>> RandomSamples(planeParams);
+                    std::vector<std::shared_ptr<DimSpace>> RemainderSamples = allData;
+                }
+            }
         };
     };
 }
