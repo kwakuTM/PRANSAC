@@ -30,7 +30,7 @@ namespace PRANSAC
     	NPfloat bestModelScore;
     	int bestModelIdx; 
 
-    	std::vector<std::mt19937>RandEnginers;  // Mersenne twister high quality RNG that support *OpenMP* multi-threading
+    	std::vector<std::mt19937>RandEngines;  // Mersenne twister high quality RNG that support *OpenMP* multi-threading
 
     public:
         RANSAC(void)
@@ -40,7 +40,7 @@ namespace PRANSAC
              for(int i = 0; i < num_threads; ++i)
              {
                 std::random_device seedDevice;
-                RandEnginers.push_back(std::mt19937(seedDevice()));
+                RandEngines.push_back(std::mt19937(seedDevice()));
              }
 
              Reset();
@@ -94,7 +94,15 @@ namespace PRANSAC
                 {
                     //Select planeParams random samples
                     std::vector<std::shared_ptr<DimSpace>> RandomSamples(planeParams);
-                    std::vector<std::shared_ptr<DimSpace>> RemainderSamples = allData;
+                    std::vector<std::shared_ptr<DimSpace>> RemainingSamples = allData;
+
+                    std::shuffle(RemainingSamples.begin(), RemainingSamples.end(), RandEngines[omp_get_thread_num()]); //shuffle to avoid picking same sample
+                    std::copy(RemainingSamples.begin(), RemainingSamples.begin() + planeParams, RandomSamples.begin()); //pick first plane values from sample
+
+                    RemainingSamples.erase(RemainingSamples.begin(), RemainingSamples.begin + planeParams);
+
+                    std::shared_ptr<P> modelContainer = std::make_shared<P>(RandomSamples);
+
                 }
             }
         };
