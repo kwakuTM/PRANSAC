@@ -93,16 +93,21 @@ namespace PRANSAC
                 if (bestInliers.siz() < num_planes_expected && allData.size() > 3)
                 {
                     //Select planeParams random samples
-                    std::vector<std::shared_ptr<DimSpace>> RandomSamples(planeParams);
-                    std::vector<std::shared_ptr<DimSpace>> RemainingSamples = allData;
+                    std::vector<std::shared_ptr<DimSpace>> sample(planeParams);
+                    std::vector<std::shared_ptr<DimSpace>> remainingSamples = allData;
 
-                    std::shuffle(RemainingSamples.begin(), RemainingSamples.end(), RandEngines[omp_get_thread_num()]); //shuffle to avoid picking same sample
-                    std::copy(RemainingSamples.begin(), RemainingSamples.begin() + planeParams, RandomSamples.begin()); //pick first plane values from sample
+                    std::shuffle(remainingSamples.begin(), remainingSamples.end(), RandEngines[omp_get_thread_num()]); //shuffle to avoid picking same sample
+                    std::copy(remainingSamples.begin(), remainingSamples.begin() + planeParams, sample.begin()); //pick first plane values from sample
 
-                    RemainingSamples.erase(RemainingSamples.begin(), RemainingSamples.begin + planeParams);
+                    remainingSamples.erase(remainingSamples.begin(), remainingSamples.begin + planeParams);
 
-                    std::shared_ptr<P> modelContainer = std::make_shared<P>(RandomSamples);
+                    std::shared_ptr<P> sampleModel = std::make_shared<P>(sample);
 
+                    //sample evaluation
+
+                    std::pair<NPdouble, std::vector<std::shared_ptr<DimSpace>>> inlierPair = sampleModel->eval(threshold, remainingSamples);
+                    InliersAccum[i] = eval.first;
+                    InlierFractionAccum = eval.second;
                 }
             }
         };
