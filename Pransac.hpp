@@ -28,7 +28,8 @@ namespace PRANSAC
     	int maxIterations; // Number of iterations before terminations
     	NPfloat threshold; // the threshold buffer
     	NPfloat bestModelScore;
-    	int bestModelIdx; 
+    	int bestModelIdx;
+        int pointsInPlane; 
 
     	std::vector<std::mt19937>RandEngines;  // Mersenne twister high quality RNG that support *OpenMP* multi-threading
 
@@ -107,7 +108,16 @@ namespace PRANSAC
 
                     std::pair<NPdouble, std::vector<std::shared_ptr<DimSpace>>> inlierPair = sampleModel->eval(threshold, remainingSamples);
                     InliersAccum[i] = eval.first;
-                    InlierFractionAccum = eval.second;
+                    InlierFractionAccum[i] = eval.second;
+
+                    // Push back into history.
+                    allSampledModels[i] = sampleModel;
+
+                    if (InlierFractionAccum[i] > bestModelScore && InliersAccum[i].size() > pointsInPlane){
+                        bestModelScore = InlierFractionAccum[i];
+                        bestModelIdx = allSampledModels.size() - 1;
+                        bestInliers.push_back(InliersAccum[i]);
+                    }
                 }
             }
         };
