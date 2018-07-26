@@ -69,6 +69,10 @@ namespace PRANSAC
         const std::vector<std::vector<std::shared_ptr<DimSpace>>>& GetBestInliers(void) { return bestInliers; };
         std::shared_ptr<T> GetBestModel(void){ return bestModel; };
         
+        void reAdjustData(){
+            std::vector<std::shared_ptr<DimSpace>> 
+        }
+
         bool Estimate(const std::vector<std::shared_ptr<DimSpace>>& Data)
         {
             if (Data.size() <= planeParams)
@@ -117,6 +121,14 @@ namespace PRANSAC
                         bestModelScore = InlierFractionAccum[i];
                         bestModelIdx = allSampledModels.size() - 1;
                         bestInliers.push_back(InliersAccum[i]);
+                        for (auto j: InliersAccum[i])
+                            {
+                                allInlierPoints.push_back(j);
+                            }
+                            for(int i = 0; i < allInlierPoints.size(); ++i)
+                            {
+                                allData.erase(std::remove(allData.begin(), allData.end(), allInlierPoints[i]), allData.end());
+                            }
                     }
                 }
             }
