@@ -14,7 +14,7 @@
 
 namespace PRANSAC
 { 
-   // T - AbstractPlane
+   // P - class Plane3D
 	template <class P, int planeParams>
     class Ransac
     {
@@ -68,10 +68,6 @@ namespace PRANSAC
         const std::vector<std::shared_ptr<DimSpace>>& GetRemainingPoints(void) { return allData; };
         const std::vector<std::vector<std::shared_ptr<DimSpace>>>& GetBestInliers(void) { return bestInliers; };
         std::shared_ptr<T> GetBestModel(void){ return bestModel; };
-        
-        void reAdjustData(){
-            std::vector<std::shared_ptr<DimSpace>> 
-        }
 
         bool Estimate(const std::vector<std::shared_ptr<DimSpace>>& Data)
         {

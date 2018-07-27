@@ -1,4 +1,4 @@
-#pragma once
+#pragma sonce
 
 #include <iostream>
 #include <stdexcept>
@@ -18,7 +18,7 @@ namespace PRANSAC
     };
 
     template <int planeParams> /* Minimum number of parameters required to define the plane model*/
-    class Plane
+    class Plane3D
     {
     protected: 
 
