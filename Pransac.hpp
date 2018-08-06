@@ -83,12 +83,7 @@ namespace PRANSAC
             std::vector<std::vector<std::shared_ptr<DimSpace>>> InliersAccum(maxIterations);
             std::vector<std::shared_ptr<DimSpace>> allInlierPoints;
             allSampledModels.resize(maxIterations);
-
-            int numTreads =std::max(1, omp_get_max_threads());
-            omp_set_dynamic(0);
-            omp_set_num_threads(numTreads);
-
-            //#pragma omp parallel for
+       
             for (int i = 0; i < maxIterations; i++)
             {
                 if (bestInliers.size() < numPlanesExpected && allData.size() > 3)

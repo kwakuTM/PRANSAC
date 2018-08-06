@@ -12,7 +12,7 @@ int main(int argc, char * argv[])
 {
 	if (argc != 1 && argc != 2)
 	{
-		std::cout << "[ USAGE ]: " << argv[0] << " [<Image Size> = 1000] [<nPoints> = 500]" << std::endl;
+		std::cout << "[ USAGE ]: " << argv[0] << "[<nPoints> = 500]" << std::endl;
 		return -1;
 	}
 
@@ -27,12 +27,9 @@ int main(int argc, char * argv[])
 
 	Estimator.Initialize(0.5, 5000); // Threshold, iterations
 	int start = cv::getTickCount();
-	Estimator.Estimate(points); // points to be checked
+	Estimator.Estimate(); // points to be checked must be passed into this function
 	int end = cv::getTickCount();
 	std::cout << "RANSAC took: " << PRANSAC::NPdouble(end - start) / PRANSAC::NPdouble(cv::getTickFrequency()) * 1000.0 << " ms." << std::endl;
-
-	auto BestInliers = Estimator.GetBestInliers();
-    auto RemainingOutliers = Estimator.GetRemainingPoints();
 	
 	return 0;
 }
