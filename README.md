@@ -1,5 +1,5 @@
 # PRANSAC
-This is a generic Plane detection algorithm using RANSAC. It's implementation is based on 3D planes but it can be extended for larger dimensions. The concept implementation is derived from [Gransac implementation](https://github.com/drsrinathsridhar/GRANSAC). 
+This is a generic Plane detection algorithm using RANSAC. It's implementation is based on 3D planes but it can be extended for larger dimensions. The concept is derived from [Gransac](https://github.com/drsrinathsridhar/GRANSAC) implementation. 
 
 ## Requirements
 This library requires a C++11 compiler(GCC 4.7+, Visual Studio 2013+)
