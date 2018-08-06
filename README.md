@@ -17,4 +17,4 @@ Note: A wrapper must be written to parse the Data for Pransac.
 
 An example of detecting planes from a point cloud with each color representing a single plane.
 
-<img src="plane1-perfect.png" width="250" height="250" align="left"><img src="LastBigPlane2.png" width="250" height ="250" align="left">
+<img src="examples/plane1-perfect.png" width="250" height="250" align="left"><img src="examples/LastBigPlane2.png" width="250" height ="250" align="left">
